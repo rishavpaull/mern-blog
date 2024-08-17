@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import {AiOutlineSearch } from 'react-icons/ai'
 import {FaMoon} from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
+
 import { NavLink } from 'react-router-dom'
 export default function Header() {
   const path = useLocation().pathname;
@@ -16,7 +17,7 @@ export default function Header() {
   return (
     <Navbar className='border-b-2 '>
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-800 via-purple-600 to-green-300 rounded-lg text-white' >Rishav's</span>
+            <span className='px-2 py-1 bg-gradient-to-r from-indigo-800 via-purple-600 to-green-300 rounded-lg text-white ' >Rishav's</span>
             Blog
         </Link>
         <form >
@@ -35,7 +36,7 @@ export default function Header() {
             <FaMoon/>
           </Button>
           <Link to='/sign-in'>
-            <Button gradientDuoTone='purpleToBlue' pill>
+            <Button gradientDuoTone='purpleToBlue' pill outline>
               Sign In
             </Button>
           </Link>
