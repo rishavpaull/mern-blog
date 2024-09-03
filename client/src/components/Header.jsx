@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSlice'
-
+import { signoutSuccess } from '../redux/user/userSlice'
 export default function Header() {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
@@ -18,7 +18,21 @@ export default function Header() {
   // const closeNavbar = () => {
   //   document.querySelector('.navbar-toggle').click();
   // };
-
+  const handleSignout = async () => {
+    try {
+      const res = await fetch('/api/user/signout', {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <Navbar className='border-b-2 '>
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
@@ -61,13 +75,13 @@ export default function Header() {
                   <Link to={'/dashboard?tab=profile'}>
                     <Dropdown.Item>Profile</Dropdown.Item>
                     <Dropdown.Divider/>
-                    <Dropdown.Item>Sign out</Dropdown.Item>
+                    <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
                   </Link>
               </Dropdown>
             ) :
             (
               <Link to='/sign-in'>
-                <Button gradientDuoTone='purpleToBlue' outline> Sign In</Button>
+                <Button  gradientDuoTone='purpleToBlue' outline> Sign In</Button>
               </Link>
             )
           }
